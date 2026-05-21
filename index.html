@@ -6,26 +6,70 @@
     <title>Mon Album Panini 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-app: #f9fafb; --bg-card: #ffffff; --primary: #111827; --text-muted: #6b7280; --border: #f3f4f6; --border-dark: #e5e7eb; --colinha-green: #2f9e61; --colinha-green-light: #e8f5e9; --sticker-bg: #f3f4f6; --whatsapp: #15803d; --gold-bg: #fef9c3; --gold-border: #fde047; --gold-text: #ca8a04; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-app); color: var(--primary); padding-bottom: 80px; }
-        .app-container { max-width: 600px; margin: 0 auto; padding: 20px 16px; min-height: 100vh; }
-        .view { display: none; animation: fadeIn 0.3s; } .view.active { display: block; }
+        :root {
+            --bg-app: #f9fafb;
+            --bg-card: #ffffff;
+            --primary: #111827;
+            --text-muted: #6b7280;
+            --border: #f3f4f6;
+            --border-dark: #e5e7eb;
+            --colinha-green: #2f9e61;
+            --colinha-green-light: #e8f5e9;
+            --sticker-bg: #f3f4f6;
+            --gold-bg: #fef9c3;
+            --gold-border: #fde047;
+            --gold-text: #ca8a04;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-app);
+            color: var(--primary);
+            padding-bottom: 80px;
+        }
+
+        .app-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            min-height: 100vh;
+        }
+
+        /* --- Vues (Onglets) --- */
+        .view { display: none; animation: fadeIn 0.3s; }
+        .view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- Header / Dashboard --- */
         .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
         .app-title { font-size: 20px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
         .btn-icon { background: var(--bg-card); border: 1px solid var(--border-dark); border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; cursor: pointer; font-size: 18px; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        
         .main-card { background: var(--bg-card); border-radius: 24px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); border: 1px solid var(--border-dark); margin-bottom: 16px; }
         .card-label { font-size: 15px; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; display: flex; justify-content: space-between; }
         .big-number { font-size: 64px; font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 20px; color: var(--primary); }
         .main-progress-track { background: var(--sticker-bg); height: 10px; border-radius: 99px; width: 100%; margin-bottom: 16px; overflow: hidden; }
         .main-progress-fill { background: var(--colinha-green); height: 100%; border-radius: 99px; width: 0%; transition: width 0.5s ease; }
         .progress-text { font-size: 14px; color: var(--text-muted); } .progress-text span { font-weight: 700; color: var(--primary); }
+
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
         .stat-card { background: var(--bg-card); border: 1px solid var(--border-dark); border-radius: 20px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .stat-icon { width: 32px; height: 32px; background: var(--colinha-green-light); color: var(--colinha-green); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 12px auto; font-size: 14px; }
         .stat-icon.blue { background: #eff6ff; color: #3b82f6; }
         .stat-value { font-size: 28px; font-weight: 800; margin-bottom: 4px; } .stat-label { font-size: 13px; font-weight: 500; color: var(--text-muted); }
+
+        /* --- Bannière Soutien Principale --- */
+        .support-banner { background: var(--gold-bg); border: 1px solid var(--gold-border); border-radius: 24px; padding: 20px; text-align: center; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(253, 224, 71, 0.15); }
+        .btn-support { display: inline-block; background: var(--primary); color: white; padding: 12px 28px; border-radius: 99px; text-decoration: none; font-weight: 700; font-size: 14px; margin-top: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: transform 0.1s; }
+        .btn-support:active { transform: scale(0.95); }
+
         .quick-add-card { background: var(--bg-card); border: 1px solid var(--border-dark); border-radius: 20px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .quick-add-label { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 12px; }
         .quick-add-flex { display: flex; gap: 12px; }
@@ -56,7 +100,6 @@
         .missing-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
         .missing-title h1 { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 4px; }
         .missing-title p { font-size: 15px; color: var(--text-muted); font-weight: 500; }
-        .btn-whatsapp { background: var(--whatsapp); color: white; border: none; padding: 10px 16px; border-radius: 99px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; cursor: pointer; }
         .search-box { width: 100%; padding: 14px 16px; border-radius: 99px; border: 1px solid var(--border-dark); background: var(--bg-card); font-size: 15px; margin-bottom: 16px; outline: none; }
         .search-album-wrapper { padding: 0 4px 12px 4px; }
         .segmented-control { display: flex; background: var(--bg-card); border: 1px solid var(--border-dark); border-radius: 99px; padding: 4px; margin-bottom: 20px; }
@@ -69,7 +112,8 @@
         .mt-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
         .mt-count { font-size: 14px; color: var(--text-muted); }
         .mt-bubbles { display: flex; flex-wrap: wrap; gap: 10px; }
-        .bubble { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border-dark); display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer; }
+        .bubble { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border-dark); display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: transform 0.1s; }
+        .bubble:active { transform: scale(0.9); }
         .bubble.special-card { background: var(--gold-bg); border-color: var(--gold-border); color: var(--gold-text); }
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-card); border-top: 1px solid var(--border-dark); display: flex; justify-content: space-around; padding: 12px 0 24px 0; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; }
@@ -81,7 +125,7 @@
         .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
         .modal-textarea { width: 100%; height: 100px; border: 1px solid var(--border-dark); border-radius: 12px; padding: 12px; font-family: monospace; margin-bottom: 16px; }
         .modal-btns { display: flex; gap: 12px; }
-        .btn-full { flex: 1; padding: 14px; border: none; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; }
+        .btn-full { flex: 1; padding: 14px; border: none; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-cancel { background: var(--bg-app); color: var(--primary); }
         .btn-save { background: var(--colinha-green); color: white; }
     </style>
@@ -123,6 +167,14 @@
             </div>
         </div>
 
+        <div class="support-banner">
+            <p style="font-size: 14px; font-weight: 700; color: var(--gold-text); margin-bottom: 2px;">🚀 L'outil te plaît et te fait gagner du temps ?</p>
+            <p style="font-size: 12px; color: var(--text-muted);">Aide-moi à maintenir l'application en ligne !</p>
+            <a href="https://buymeacoffee.com/cartombdx" target="_blank" class="btn-support">
+                ✨ Me soutenir
+            </a>
+        </div>
+
         <div class="quick-add-card">
             <div class="quick-add-label">Ajouter un sticker (Ex: MEX 12)</div>
             <div class="quick-add-flex">
@@ -147,7 +199,6 @@
                 <h1>Stickers</h1>
                 <p><span id="missing-subtitle-count">874</span> stickers manquants</p>
             </div>
-            <button class="btn-whatsapp">🔗 Partager</button>
         </div>
 
         <input type="text" class="search-box" id="search-missing" placeholder="🔍 Pays ou code (ex: MEX)..." oninput="renderMissingView()">
@@ -188,44 +239,22 @@
     </div>
 
     <script>
-        const GROUPS_DATA = [
-            { name: "Section Spéciale", teams: [{ name: "Spécial", code: "SPC", flag: "✨" }] },
-            { name: "Groupe A", teams: [{ name: "Mexique", code: "MEX", flag: "🇲🇽" }, { name: "Afrique du Sud", code: "RSA", flag: "🇿🇦" }, { name: "Corée du Sud", code: "KOR", flag: "🇰🇷" }, { name: "Rép. Tchèque", code: "CZE", flag: "🇨🇿" }] },
-            { name: "Groupe B", teams: [{ name: "Canada", code: "CAN", flag: "🇨🇦" }, { name: "Bosnie-H.", code: "BIH", flag: "🇧🇦" }, { name: "Qatar", code: "QAT", flag: "🇶🇦" }, { name: "Suisse", code: "SUI", flag: "🇨🇭" }] },
-            { name: "Groupe C", teams: [{ name: "Brésil", code: "BRA", flag: "🇧🇷" }, { name: "Maroc", code: "MAR", flag: "🇲🇦" }, { name: "Haïti", code: "HAI", flag: "🇭🇹" }, { name: "Écosse", code: "SCO", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿" }] },
-            { name: "Groupe D", teams: [{ name: "États-Unis", code: "USA", flag: "🇺🇸" }, { name: "Paraguay", code: "PAR", flag: "🇵🇾" }, { name: "Australie", code: "AUS", flag: "🇦🇺" }, { name: "Turquie", code: "TUR", flag: "🇹🇷" }] },
-            { name: "Groupe E", teams: [{ name: "Allemagne", code: "GER", flag: "🇩🇪" }, { name: "Curaçao", code: "CUW", flag: "🇨🇼" }, { name: "Côte d'Ivoire", code: "CIV", flag: "🇨🇮" }, { name: "Équateur", code: "ECU", flag: "🇪🇨" }] },
-            { name: "Groupe F", teams: [{ name: "Pays-Bas", code: "NED", flag: "🇳🇱" }, { name: "Japon", code: "JPN", flag: "🇯🇵" }, { name: "Suède", code: "SWE", flag: "🇸🇪" }, { name: "Tunisie", code: "TUN", flag: "🇹🇳" }] },
-            { name: "Groupe G", teams: [{ name: "Belgique", code: "BEL", flag: "🇧🇪" }, { name: "Égypte", code: "EGY", flag: "🇪🇬" }, { name: "Iran", code: "IRN", flag: "🇮🇷" }, { name: "N. Zélande", code: "NZL", flag: "🇳🇿" }] },
-            { name: "Groupe H", teams: [{ name: "Espagne", code: "ESP", flag: "🇪🇸" }, { name: "Cap-Vert", code: "CPV", flag: "🇨🇻" }, { name: "Arabie Saoudite", code: "KSA", flag: "🇸🇦" }, { name: "Uruguay", code: "URU", flag: "🇺🇾" }] },
-            { name: "Groupe I", teams: [{ name: "France", code: "FRA", flag: "🇫🇷" }, { name: "Sénégal", code: "SEN", flag: "🇸🇳" }, { name: "Irak", code: "IRQ", flag: "🇮🇶" }, { name: "Norvège", code: "NOR", flag: "🇳🇴" }] },
-            { name: "Groupe J", teams: [{ name: "Argentine", code: "ARG", flag: "🇦🇷" }, { name: "Algérie", code: "ALG", flag: "🇩🇿" }, { name: "Autriche", code: "AUT", flag: "🇦🇹" }, { name: "Jordanie", code: "JOR", flag: "🇯🇴" }] },
-            { name: "Groupe K", teams: [{ name: "Portugal", code: "POR", flag: "🇵🇹" }, { name: "RD Congo", code: "COD", flag: "🇨🇩" }, { name: "Ouzbékistan", code: "UZB", flag: "🇺🇿" }, { name: "Colombie", code: "COL", flag: "🇨🇴" }] },
-            { name: "Groupe L", teams: [{ name: "Angleterre", code: "ENG", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" }, { name: "Croatie", code: "CRO", flag: "🇭🇷" }, { name: "Ghana", code: "GHA", flag: "🇬🇭" }, { name: "Panama", code: "PAN", flag: "🇵🇦" }] }
-        ];
-
-        let FLAT_TEAMS = [];
-        GROUPS_DATA.forEach(g => { g.teams.forEach(t => FLAT_TEAMS.push(t)); });
-
-        const MAX = 20;
-        let data = {};
+        const GROUPS_DATA=[{name:"Section Spéciale",teams:[{name:"Spécial",code:"SPC",flag:"✨"}]},{name:"Groupe A",teams:[{name:"Mexique",code:"MEX",flag:"🇲🇽"},{name:"Afrique du Sud",code:"RSA",flag:"🇿🇦"},{name:"Corée du Sud",code:"KOR",flag:"🇰🇷"},{name:"Rép. Tchèque",code:"CZE",flag:"🇨🇿"}]},{name:"Groupe B",teams:[{name:"Canada",code:"CAN",flag:"🇨🇦"},{name:"Bosnie-H.",code:"BIH",flag:"🇧🇦"},{name:"Qatar",code:"QAT",flag:"🇶🇦"},{name:"Suisse",code:"SUI",flag:"🇨🇭"}]},{name:"Groupe C",teams:[{name:"Brésil",code:"BRA",flag:"🇧🇷"},{name:"Maroc",code:"MAR",flag:"🇲🇦"},{name:"Haïti",code:"HAI",flag:"🇭🇹"},{name:"Écosse",code:"SCO",flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿"}]},{name:"Groupe D",teams:[{name:"États-Unis",code:"USA",flag:"🇺🇸"},{name:"Paraguay",code:"PAR",flag:"🇵🇾"},{name:"Australie",code:"AUS",flag:"🇦🇺"},{name:"Turquie",code:"TUR",flag:"🇹🇷"}]},{name:"Groupe E",teams:[{name:"Allemagne",code:"GER",flag:"🇩🇪"},{name:"Curaçao",code:"CUW",flag:"🇨🇼"},{name:"Côte d'Ivoire",code:"CIV",flag:"🇨🇮"},{name:"Équateur",code:"ECU",flag:"🇪🇨"}]},{name:"Groupe F",teams:[{name:"Pays-Bas",code:"NED",flag:"🇳🇱"},{name:"Japon",code:"JPN",flag:"🇯🇵"},{name:"Suède",code:"SWE",flag:"🇸🇪"},{name:"Tunisie",code:"TUN",flag:"🇹🇳"}]},{name:"Groupe G",teams:[{name:"Belgique",code:"BEL",flag:"🇧🇪"},{name:"Égypte",code:"EGY",flag:"🇪🇬"},{name:"Iran",code:"IRN",flag:"🇮🇷"},{name:"N. Zélande",code:"NZL",flag:"🇳🇿"}]},{name:"Groupe H",teams:[{name:"Espagne",code:"ESP",flag:"🇪🇸"},{name:"Cap-Vert",code:"CPV",flag:"🇨🇻"},{name:"Arabie Saoudite",code:"KSA",flag:"🇸🇦"},{name:"Uruguay",code:"URU",flag:"🇺🇾"}]},{name:"Groupe I",teams:[{name:"France",code:"FRA",flag:"🇫🇷"},{name:"Sénégal",code:"SEN",flag:"🇸🇳"},{name:"Irak",code:"IRQ",flag:"🇮🇶"},{name:"Norvège",code:"NOR",flag:"🇳🇴"}]},{name:"Groupe J",teams:[{name:"Argentine",code:"ARG",flag:"🇦🇷"},{name:"Algérie",code:"ALG",flag:"🇩🇿"},{name:"Autriche",code:"AUT",flag:"🇦🇹"},{name:"Jordanie",code:"JOR",flag:"🇯🇴"}]},{name:"Groupe K",teams:[{name:"Portugal",code:"POR",flag:"🇵🇹"},{name:"RD Congo",code:"COD",flag:"🇨🇩"},{name:"Ouzbékistan",code:"UZB",flag:"🇺🇿"},{name:"Colombie",code:"COL",flag:"🇨🇴"}]},{name:"Groupe L",teams:[{name:"Angleterre",code:"ENG",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{name:"Croatie",code:"CRO",flag:"🇭🇷"},{name:"Ghana",code:"GHA",flag:"🇬🇭"},{name:"Panama",code:"PAN",flag:"🇵🇦"}]}];
+        let FLAT_TEAMS=[]; GROUPS_DATA.forEach(g=>g.teams.forEach(t=>FLAT_TEAMS.push(t)));
+        const MAX=20; let data={};
 
         function init() {
             const saved = localStorage.getItem('panini_colinha_fr');
             if (saved) { try { data = JSON.parse(saved); } catch(e) { data = {}; } }
-            
+            if (Object.keys(data).length === 0) {
+                const old = localStorage.getItem('panini_data_profil_1') || localStorage.getItem('panini_active_profile');
+                if(old) { try { data = JSON.parse(localStorage.getItem('panini_data_profil_1')); save(); } catch(e){} }
+            }
             FLAT_TEAMS.forEach(t => { if(!data[t.code]) data[t.code] = []; });
-            
-            buildSelect();
-            renderDashboardGroups();
-            updateDashboard();
-            renderMissingView();
+            buildSelect(); renderDashboardGroups(); updateDashboard(); renderMissingView();
         }
 
-        function save() {
-            localStorage.setItem('panini_colinha_fr', JSON.stringify(data));
-            updateDashboard();
-        }
+        function save() { localStorage.setItem('panini_colinha_fr', JSON.stringify(data)); updateDashboard(); }
 
         function switchView(viewName) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -244,34 +273,25 @@
         function quickAdd() {
             const code = document.getElementById('quick-team').value;
             const num = parseInt(document.getElementById('quick-num').value);
-            
             if (num > 0 && num <= MAX) {
                 if (!data[code].includes(num)) {
-                    data[code].push(num);
-                    save();
+                    data[code].push(num); save();
                     const btn = document.getElementById(`stk-${code}-${num}`);
                     if(btn) btn.classList.add('owned');
                     updateTeamRow(code);
                     document.getElementById('quick-num').value = '';
                     document.getElementById('quick-num').placeholder = "Ajouté !";
                     setTimeout(() => document.getElementById('quick-num').placeholder = "N° (1-20)", 1500);
-                } else {
-                    alert("Tu as déjà ce sticker !");
-                }
+                } else { alert("Tu as déjà ce sticker !"); }
             }
         }
 
-        // Accordéon : Ouvre le panneau et ferme les autres
         function togglePanel(code) {
             const allPanels = document.querySelectorAll('.stickers-panel');
             const targetPanel = document.getElementById(`panel-${code}`);
             const isCurrentlyOpen = targetPanel.style.display === 'block';
-
             allPanels.forEach(p => p.style.display = 'none');
-
-            if (!isCurrentlyOpen) {
-                targetPanel.style.display = 'block';
-            }
+            if (!isCurrentlyOpen) targetPanel.style.display = 'block';
         }
 
         function clickSticker(code, num) {
@@ -284,60 +304,37 @@
                 data[code].push(num);
                 if(el) el.classList.add('owned');
             }
-            save();
-            updateTeamRow(code);
+            save(); updateTeamRow(code);
         }
 
-        // Recherche Pays dans le Dashboard
         function filterAlbum() {
             const query = document.getElementById('search-album').value.toLowerCase();
             const containers = document.querySelectorAll('.teams-container');
             const groups = document.querySelectorAll('.group-header');
-
             containers.forEach((container, index) => {
                 const rows = container.querySelectorAll('.team-row');
                 let hasVisibleRow = false;
-
                 rows.forEach(row => {
                     const name = row.querySelector('.t-name').innerText.toLowerCase();
                     const code = row.querySelector('.t-code').innerText.toLowerCase();
-                    if (name.includes(query) || code.includes(query)) {
-                        row.style.display = 'block';
-                        hasVisibleRow = true;
-                    } else {
-                        row.style.display = 'none';
-                    }
+                    if (name.includes(query) || code.includes(query)) { row.style.display = 'block'; hasVisibleRow = true; } 
+                    else { row.style.display = 'none'; }
                 });
-
-                if (hasVisibleRow) {
-                    container.style.display = 'block';
-                    groups[index].style.display = 'block';
-                } else {
-                    container.style.display = 'none';
-                    groups[index].style.display = 'none';
-                }
+                if (hasVisibleRow) { container.style.display = 'block'; groups[index].style.display = 'block'; } 
+                else { container.style.display = 'none'; groups[index].style.display = 'none'; }
             });
         }
 
         function renderDashboardGroups() {
             const container = document.getElementById('grouped-list');
             container.innerHTML = '';
-
             GROUPS_DATA.forEach(group => {
-                const gTitle = document.createElement('div');
-                gTitle.className = 'group-header';
-                gTitle.innerText = group.name;
+                const gTitle = document.createElement('div'); gTitle.className = 'group-header'; gTitle.innerText = group.name;
                 container.appendChild(gTitle);
-
-                const tContainer = document.createElement('div');
-                tContainer.className = 'teams-container';
-
+                const tContainer = document.createElement('div'); tContainer.className = 'teams-container';
                 group.teams.forEach(t => {
-                    const count = data[t.code].length;
-                    const pct = Math.round((count / MAX) * 100);
-                    const row = document.createElement('div');
-                    row.className = 'team-row';
-                    
+                    const count = data[t.code].length; const pct = Math.round((count / MAX) * 100);
+                    const row = document.createElement('div'); row.className = 'team-row';
                     let stickersHtml = '';
                     for (let i = 1; i <= MAX; i++) {
                         const owned = data[t.code].includes(i) ? 'owned' : '';
@@ -345,23 +342,7 @@
                         const isSpcGroup = t.code === "SPC" ? 'special-card' : '';
                         stickersHtml += `<div class="sticker ${owned} ${isSpecial} ${isSpcGroup}" id="stk-${t.code}-${i}" onclick="clickSticker('${t.code}', ${i})">${i}</div>`;
                     }
-
-                    row.innerHTML = `
-                        <div class="team-row-header" onclick="togglePanel('${t.code}')">
-                            <div class="team-flag">${t.flag}</div>
-                            <div class="team-info-main">
-                                <div class="team-name-line"><span class="t-name">${t.name}</span><span class="t-code">· ${t.code}</span></div>
-                                <div class="t-track"><div class="t-fill" id="bar-${t.code}" style="width: ${pct}%"></div></div>
-                            </div>
-                            <div class="team-stats">
-                                <div class="t-percent" id="pct-${t.code}">${pct}%</div>
-                                <div class="t-fraction" id="frac-${t.code}">${count}/${MAX}</div>
-                            </div>
-                        </div>
-                        <div class="stickers-panel" id="panel-${t.code}">
-                            <div class="stickers-grid">${stickersHtml}</div>
-                        </div>
-                    `;
+                    row.innerHTML = `<div class="team-row-header" onclick="togglePanel('${t.code}')"><div class="team-flag">${t.flag}</div><div class="team-info-main"><div class="team-name-line"><span class="t-name">${t.name}</span><span class="t-code">· ${t.code}</span></div><div class="t-track"><div class="t-fill" id="bar-${t.code}" style="width: ${pct}%"></div></div></div><div class="team-stats"><div class="t-percent" id="pct-${t.code}">${pct}%</div><div class="t-fraction" id="frac-${t.code}">${count}/${MAX}</div></div></div><div class="stickers-panel" id="panel-${t.code}"><div class="stickers-grid">${stickersHtml}</div></div>`;
                     tContainer.appendChild(row);
                 });
                 container.appendChild(tContainer);
@@ -369,101 +350,53 @@
         }
 
         function updateTeamRow(code) {
-            const count = data[code].length;
-            const pct = Math.round((count / MAX) * 100);
-            
-            const frac = document.getElementById(`frac-${code}`);
-            const pctEl = document.getElementById(`pct-${code}`);
-            const bar = document.getElementById(`bar-${code}`);
-            
+            const count = data[code].length; const pct = Math.round((count / MAX) * 100);
+            const frac = document.getElementById(`frac-${code}`); const pctEl = document.getElementById(`pct-${code}`); const bar = document.getElementById(`bar-${code}`);
             if(frac) frac.innerText = `${count}/${MAX}`;
-            if(pctEl) {
-                pctEl.innerText = `${pct}%`;
-                pctEl.style.color = count === MAX ? "var(--colinha-green)" : "";
-            }
+            if(pctEl) { pctEl.innerText = `${pct}%`; pctEl.style.color = count === MAX ? "var(--colinha-green)" : ""; }
             if(bar) bar.style.width = `${pct}%`;
         }
 
         function updateDashboard() {
-            let total = 0;
-            const maxTotal = FLAT_TEAMS.length * MAX;
-            let completed = 0;
-
-            for (const code in data) {
-                total += data[code].length;
-                if (data[code].length === MAX) completed++;
-            }
-
-            const manquants = maxTotal - total;
-            const pct = Math.round((total / maxTotal) * 100);
-
+            let total = 0; const maxTotal = FLAT_TEAMS.length * MAX; let completed = 0;
+            for (const code in data) { total += data[code].length; if (data[code].length === MAX) completed++; }
+            const manquants = maxTotal - total; const pct = Math.round((total / maxTotal) * 100);
             document.getElementById('missing-count').innerText = manquants;
             document.getElementById('main-progress-bar').style.width = `${pct}%`;
             document.getElementById('main-progress-pct').innerText = `${pct}%`;
-            
             document.getElementById('owned-count').innerText = total;
             document.getElementById('completed-teams').innerText = completed;
-
             document.getElementById('missing-subtitle-count').innerText = manquants;
             document.getElementById('tab-missing-count').innerText = manquants;
         }
 
-        function clickMissing(code, num) {
-            data[code].push(num);
-            save();
-            renderMissingView();
-        }
+        function clickMissing(code, num) { data[code].push(num); save(); renderMissingView(); }
 
         function renderMissingView() {
             const container = document.getElementById('missing-cards-container');
             const search = document.getElementById('search-missing').value.toLowerCase();
             container.innerHTML = '';
-
             FLAT_TEAMS.forEach(t => {
                 if (search && !t.name.toLowerCase().includes(search) && !t.code.toLowerCase().includes(search)) return;
-
-                const owned = data[t.code] || [];
-                let missingNums = [];
-                for (let i = 1; i <= MAX; i++) {
-                    if (!owned.includes(i)) missingNums.push(i);
-                }
-
+                const owned = data[t.code] || []; let missingNums = [];
+                for (let i = 1; i <= MAX; i++) { if (!owned.includes(i)) missingNums.push(i); }
                 if (missingNums.length > 0) {
-                    const card = document.createElement('div');
-                    card.className = 'missing-team-card';
-                    
+                    const card = document.createElement('div'); card.className = 'missing-team-card';
                     let bubblesHtml = '';
                     missingNums.forEach(n => {
                         const isSpecial = (n === 1 || n === 13) && t.code !== "SPC" ? 'special-card' : '';
                         const isSpcGroup = t.code === "SPC" ? 'special-card' : '';
                         bubblesHtml += `<div class="bubble ${isSpecial} ${isSpcGroup}" onclick="clickMissing('${t.code}', ${n})">${n}</div>`;
                     });
-
-                    card.innerHTML = `
-                        <div class="mt-header">
-                            <div class="mt-title">${t.flag} ${t.name}</div>
-                            <div class="mt-count">${missingNums.length} manquants</div>
-                        </div>
-                        <div class="mt-bubbles">
-                            ${bubblesHtml}
-                        </div>
-                    `;
+                    card.innerHTML = `<div class="mt-header"><div class="mt-title">${t.flag} ${t.name}</div><div class="mt-count">${missingNums.length} manquants</div></div><div class="mt-bubbles">${bubblesHtml}</div>`;
                     container.appendChild(card);
                 }
             });
         }
 
-        // Modal
         function openModal() { document.getElementById('modal-text').value = JSON.stringify(data); document.getElementById('modal').style.display = 'flex'; }
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
-        function importData() {
-            try {
-                const parsed = JSON.parse(document.getElementById('modal-text').value);
-                if (typeof parsed === 'object') {
-                    data = parsed; save(); renderDashboardGroups(); renderMissingView(); closeModal();
-                }
-            } catch(e) { alert("Code invalide."); }
-        }
+        function importData() { try { const parsed = JSON.parse(document.getElementById('modal-text').value); if (typeof parsed === 'object') { data = parsed; save(); renderDashboardGroups(); renderMissingView(); closeModal(); } } catch(e) { alert("Code invalide."); } }
 
         window.onload = init;
     </script>
