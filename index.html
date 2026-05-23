@@ -77,6 +77,7 @@
         .quick-select { border: none; background: transparent; padding: 0 12px; font-size: 15px; font-weight: 500; color: var(--primary); outline: none; border-right: 1px solid var(--border-dark); max-width: 100px; }
         .quick-input { flex: 1; border: none; background: transparent; padding: 12px; font-size: 15px; outline: none; color: var(--primary); width: 100%; }
         .btn-add { background: #bbf7d0; color: #166534; border: none; padding: 0 16px; border-radius: 12px; font-weight: 700; font-size: 14px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+        
         .group-header { font-size: 14px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin: 24px 0 12px 8px; letter-spacing: 0.5px; }
         .teams-container { background: var(--bg-card); border: 1px solid var(--border-dark); border-radius: 20px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.02); margin-bottom: 20px; }
         .team-row { padding: 16px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.2s; }
@@ -97,6 +98,7 @@
         .sticker { aspect-ratio: 1; background: var(--bg-app); border: 1px solid var(--border-dark); border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.1s; }
         .sticker.special-card { background: var(--gold-bg); border-color: var(--gold-border); color: var(--gold-text); }
         .sticker.owned { background: var(--colinha-green) !important; border-color: var(--colinha-green) !important; color: white !important; }
+        
         .missing-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
         .missing-title h1 { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 4px; }
         .missing-title p { font-size: 15px; color: var(--text-muted); font-weight: 500; }
@@ -187,7 +189,7 @@
         </div>
 
         <div class="search-album-wrapper">
-            <input type="text" class="search-box" id="search-album" placeholder="🔍 Rechercher un pays..." oninput="filterAlbum()">
+            <input type="text" class="search-box" id="search-album" placeholder="🔍 Rechercher un pays, code ou page..." oninput="filterAlbum()">
         </div>
 
         <div id="grouped-list"></div>
@@ -201,7 +203,7 @@
             </div>
         </div>
 
-        <input type="text" class="search-box" id="search-missing" placeholder="🔍 Pays ou code (ex: MEX)..." oninput="renderMissingView()">
+        <input type="text" class="search-box" id="search-missing" placeholder="🔍 Pays, code ou page..." oninput="renderMissingView()">
 
         <div class="segmented-control">
             <button class="segment-btn active">Manquants (<span id="tab-missing-count">874</span>)</button>
@@ -239,17 +241,29 @@
     </div>
 
     <script>
-        const GROUPS_DATA=[{name:"Section Spéciale",teams:[{name:"Spécial",code:"SPC",flag:"✨"}]},{name:"Groupe A",teams:[{name:"Mexique",code:"MEX",flag:"🇲🇽"},{name:"Afrique du Sud",code:"RSA",flag:"🇿🇦"},{name:"Corée du Sud",code:"KOR",flag:"🇰🇷"},{name:"Rép. Tchèque",code:"CZE",flag:"🇨🇿"}]},{name:"Groupe B",teams:[{name:"Canada",code:"CAN",flag:"🇨🇦"},{name:"Bosnie-H.",code:"BIH",flag:"🇧🇦"},{name:"Qatar",code:"QAT",flag:"🇶🇦"},{name:"Suisse",code:"SUI",flag:"🇨🇭"}]},{name:"Groupe C",teams:[{name:"Brésil",code:"BRA",flag:"🇧🇷"},{name:"Maroc",code:"MAR",flag:"🇲🇦"},{name:"Haïti",code:"HAI",flag:"🇭🇹"},{name:"Écosse",code:"SCO",flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿"}]},{name:"Groupe D",teams:[{name:"États-Unis",code:"USA",flag:"🇺🇸"},{name:"Paraguay",code:"PAR",flag:"🇵🇾"},{name:"Australie",code:"AUS",flag:"🇦🇺"},{name:"Turquie",code:"TUR",flag:"🇹🇷"}]},{name:"Groupe E",teams:[{name:"Allemagne",code:"GER",flag:"🇩🇪"},{name:"Curaçao",code:"CUW",flag:"🇨🇼"},{name:"Côte d'Ivoire",code:"CIV",flag:"🇨🇮"},{name:"Équateur",code:"ECU",flag:"🇪🇨"}]},{name:"Groupe F",teams:[{name:"Pays-Bas",code:"NED",flag:"🇳🇱"},{name:"Japon",code:"JPN",flag:"🇯🇵"},{name:"Suède",code:"SWE",flag:"🇸🇪"},{name:"Tunisie",code:"TUN",flag:"🇹🇳"}]},{name:"Groupe G",teams:[{name:"Belgique",code:"BEL",flag:"🇧🇪"},{name:"Égypte",code:"EGY",flag:"🇪🇬"},{name:"Iran",code:"IRN",flag:"🇮🇷"},{name:"N. Zélande",code:"NZL",flag:"🇳🇿"}]},{name:"Groupe H",teams:[{name:"Espagne",code:"ESP",flag:"🇪🇸"},{name:"Cap-Vert",code:"CPV",flag:"🇨🇻"},{name:"Arabie Saoudite",code:"KSA",flag:"🇸🇦"},{name:"Uruguay",code:"URU",flag:"🇺🇾"}]},{name:"Groupe I",teams:[{name:"France",code:"FRA",flag:"🇫🇷"},{name:"Sénégal",code:"SEN",flag:"🇸🇳"},{name:"Irak",code:"IRQ",flag:"🇮🇶"},{name:"Norvège",code:"NOR",flag:"🇳🇴"}]},{name:"Groupe J",teams:[{name:"Argentine",code:"ARG",flag:"🇦🇷"},{name:"Algérie",code:"ALG",flag:"🇩🇿"},{name:"Autriche",code:"AUT",flag:"🇦🇹"},{name:"Jordanie",code:"JOR",flag:"🇯🇴"}]},{name:"Groupe K",teams:[{name:"Portugal",code:"POR",flag:"🇵🇹"},{name:"RD Congo",code:"COD",flag:"🇨🇩"},{name:"Ouzbékistan",code:"UZB",flag:"🇺🇿"},{name:"Colombie",code:"COL",flag:"🇨🇴"}]},{name:"Groupe L",teams:[{name:"Angleterre",code:"ENG",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{name:"Croatie",code:"CRO",flag:"🇭🇷"},{name:"Ghana",code:"GHA",flag:"🇬🇭"},{name:"Panama",code:"PAN",flag:"🇵🇦"}]}];
+        // Array complet avec intégration des numéros de page exacts selon le document fourni
+        const GROUPS_DATA=[
+            {name:"Section Spéciale",teams:[{name:"Spécial",code:"SPC",flag:"✨",page:2}]},
+            {name:"Groupe A",teams:[{name:"Mexique",code:"MEX",flag:"🇲🇽",page:8},{name:"Afrique du Sud",code:"RSA",flag:"🇿🇦",page:10},{name:"Corée du Sud",code:"KOR",flag:"🇰🇷",page:12},{name:"Rép. Tchèque",code:"CZE",flag:"🇨🇿",page:14}]},
+            {name:"Groupe B",teams:[{name:"Canada",code:"CAN",flag:"🇨🇦",page:16},{name:"Bosnie-H.",code:"BIH",flag:"🇧🇦",page:18},{name:"Qatar",code:"QAT",flag:"🇶🇦",page:20},{name:"Suisse",code:"SUI",flag:"🇨🇭",page:22}]},
+            {name:"Groupe C",teams:[{name:"Brésil",code:"BRA",flag:"🇧🇷",page:24},{name:"Maroc",code:"MAR",flag:"🇲🇦",page:26},{name:"Haïti",code:"HAI",flag:"🇭🇹",page:28},{name:"Écosse",code:"SCO",flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",page:30}]},
+            {name:"Groupe D",teams:[{name:"États-Unis",code:"USA",flag:"🇺🇸",page:32},{name:"Paraguay",code:"PAR",flag:"🇵🇾",page:34},{name:"Australie",code:"AUS",flag:"🇦🇺",page:36},{name:"Turquie",code:"TUR",flag:"🇹🇷",page:38}]},
+            {name:"Groupe E",teams:[{name:"Allemagne",code:"GER",flag:"🇩🇪",page:40},{name:"Curaçao",code:"CUW",flag:"🇨🇼",page:42},{name:"Côte d'Ivoire",code:"CIV",flag:"🇨🇮",page:44},{name:"Équateur",code:"ECU",flag:"🇪🇨",page:46}]},
+            {name:"Groupe F",teams:[{name:"Pays-Bas",code:"NED",flag:"🇳🇱",page:48},{name:"Japon",code:"JPN",flag:"🇯🇵",page:50},{name:"Suède",code:"SWE",flag:"🇸🇪",page:52},{name:"Tunisie",code:"TUN",flag:"🇹🇳",page:54}]},
+            {name:"Groupe G",teams:[{name:"Belgique",code:"BEL",flag:"🇧🇪",page:58},{name:"Égypte",code:"EGY",flag:"🇪🇬",page:60},{name:"Iran",code:"IRN",flag:"🇮🇷",page:62},{name:"N. Zélande",code:"NZL",flag:"🇳🇿",page:64}]},
+            {name:"Groupe H",teams:[{name:"Espagne",code:"ESP",flag:"🇪🇸",page:66},{name:"Cap-Vert",code:"CPV",flag:"🇨🇻",page:68},{name:"Arabie Saoudite",code:"KSA",flag:"🇸🇦",page:70},{name:"Uruguay",code:"URU",flag:"🇺🇾",page:72}]},
+            {name:"Groupe I",teams:[{name:"France",code:"FRA",flag:"🇫🇷",page:74},{name:"Sénégal",code:"SEN",flag:"🇸🇳",page:76},{name:"Irak",code:"IRQ",flag:"🇮🇶",page:78},{name:"Norvège",code:"NOR",flag:"🇳🇴",page:80}]},
+            {name:"Groupe J",teams:[{name:"Argentine",code:"ARG",flag:"🇦🇷",page:82},{name:"Algérie",code:"ALG",flag:"🇩🇿",page:84},{name:"Autriche",code:"AUT",flag:"🇦🇹",page:86},{name:"Jordanie",code:"JOR",flag:"🇯🇴",page:88}]},
+            {name:"Groupe K",teams:[{name:"Portugal",code:"POR",flag:"🇵🇹",page:90},{name:"RD Congo",code:"COD",flag:"🇨🇩",page:92},{name:"Ouzbékistan",code:"UZB",flag:"🇺🇿",page:94},{name:"Colombie",code:"COL",flag:"🇨🇴",page:96}]},
+            {name:"Groupe L",teams:[{name:"Angleterre",code:"ENG",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",page:98},{name:"Croatie",code:"CRO",flag:"🇭🇷",page:100},{name:"Ghana",code:"GHA",flag:"🇬🇭",page:102},{name:"Panama",code:"PAN",flag:"🇵🇦",page:104}]}
+        ];
+        
         let FLAT_TEAMS=[]; GROUPS_DATA.forEach(g=>g.teams.forEach(t=>FLAT_TEAMS.push(t)));
         const MAX=20; let data={};
 
         function init() {
             const saved = localStorage.getItem('panini_colinha_fr');
             if (saved) { try { data = JSON.parse(saved); } catch(e) { data = {}; } }
-            if (Object.keys(data).length === 0) {
-                const old = localStorage.getItem('panini_data_profil_1') || localStorage.getItem('panini_active_profile');
-                if(old) { try { data = JSON.parse(localStorage.getItem('panini_data_profil_1')); save(); } catch(e){} }
-            }
             FLAT_TEAMS.forEach(t => { if(!data[t.code]) data[t.code] = []; });
             buildSelect(); renderDashboardGroups(); updateDashboard(); renderMissingView();
         }
@@ -307,21 +321,33 @@
             save(); updateTeamRow(code);
         }
 
+        // Recherche améliorée par Pays, Code ou Numéro de Page
         function filterAlbum() {
             const query = document.getElementById('search-album').value.toLowerCase();
             const containers = document.querySelectorAll('.teams-container');
             const groups = document.querySelectorAll('.group-header');
+
             containers.forEach((container, index) => {
                 const rows = container.querySelectorAll('.team-row');
                 let hasVisibleRow = false;
+
                 rows.forEach(row => {
-                    const name = row.querySelector('.t-name').innerText.toLowerCase();
-                    const code = row.querySelector('.t-code').innerText.toLowerCase();
-                    if (name.includes(query) || code.includes(query)) { row.style.display = 'block'; hasVisibleRow = true; } 
-                    else { row.style.display = 'none'; }
+                    const infoText = row.querySelector('.team-info-main').innerText.toLowerCase();
+                    if (infoText.includes(query)) {
+                        row.style.display = 'block';
+                        hasVisibleRow = true;
+                    } else {
+                        row.style.display = 'none';
+                    }
                 });
-                if (hasVisibleRow) { container.style.display = 'block'; groups[index].style.display = 'block'; } 
-                else { container.style.display = 'none'; groups[index].style.display = 'none'; }
+
+                if (hasVisibleRow) {
+                    container.style.display = 'block';
+                    groups[index].style.display = 'block';
+                } else {
+                    container.style.display = 'none';
+                    groups[index].style.display = 'none';
+                }
             });
         }
 
@@ -335,6 +361,7 @@
                 group.teams.forEach(t => {
                     const count = data[t.code].length; const pct = Math.round((count / MAX) * 100);
                     const row = document.createElement('div'); row.className = 'team-row';
+                    
                     let stickersHtml = '';
                     for (let i = 1; i <= MAX; i++) {
                         const owned = data[t.code].includes(i) ? 'owned' : '';
@@ -342,7 +369,9 @@
                         const isSpcGroup = t.code === "SPC" ? 'special-card' : '';
                         stickersHtml += `<div class="sticker ${owned} ${isSpecial} ${isSpcGroup}" id="stk-${t.code}-${i}" onclick="clickSticker('${t.code}', ${i})">${i}</div>`;
                     }
-                    row.innerHTML = `<div class="team-row-header" onclick="togglePanel('${t.code}')"><div class="team-flag">${t.flag}</div><div class="team-info-main"><div class="team-name-line"><span class="t-name">${t.name}</span><span class="t-code">· ${t.code}</span></div><div class="t-track"><div class="t-fill" id="bar-${t.code}" style="width: ${pct}%"></div></div></div><div class="team-stats"><div class="t-percent" id="pct-${t.code}">${pct}%</div><div class="t-fraction" id="frac-${t.code}">${count}/${MAX}</div></div></div><div class="stickers-panel" id="panel-${t.code}"><div class="stickers-grid">${stickersHtml}</div></div>`;
+                    
+                    // Rendu de la ligne avec le numéro de page complet
+                    row.innerHTML = `<div class="team-row-header" onclick="togglePanel('${t.code}')"><div class="team-flag">${t.flag}</div><div class="team-info-main"><div class="team-name-line"><span class="t-name">${t.name}</span><span class="t-code">· ${t.code} · p. ${t.page}</span></div><div class="t-track"><div class="t-fill" id="bar-${t.code}" style="width: ${pct}%"></div></div></div><div class="team-stats"><div class="t-percent" id="pct-${t.code}">${pct}%</div><div class="t-fraction" id="frac-${t.code}">${count}/${MAX}</div></div></div><div class="stickers-panel" id="panel-${t.code}"><div class="stickers-grid">${stickersHtml}</div></div>`;
                     tContainer.appendChild(row);
                 });
                 container.appendChild(tContainer);
@@ -377,7 +406,7 @@
             const search = document.getElementById('search-missing').value.toLowerCase();
             container.innerHTML = '';
             FLAT_TEAMS.forEach(t => {
-                if (search && !t.name.toLowerCase().includes(search) && !t.code.toLowerCase().includes(search)) return;
+                if (search && !t.name.toLowerCase().includes(search) && !t.code.toLowerCase().includes(search) && !t.page.toString().includes(search)) return;
                 const owned = data[t.code] || []; let missingNums = [];
                 for (let i = 1; i <= MAX; i++) { if (!owned.includes(i)) missingNums.push(i); }
                 if (missingNums.length > 0) {
@@ -388,7 +417,7 @@
                         const isSpcGroup = t.code === "SPC" ? 'special-card' : '';
                         bubblesHtml += `<div class="bubble ${isSpecial} ${isSpcGroup}" onclick="clickMissing('${t.code}', ${n})">${n}</div>`;
                     });
-                    card.innerHTML = `<div class="mt-header"><div class="mt-title">${t.flag} ${t.name}</div><div class="mt-count">${missingNums.length} manquants</div></div><div class="mt-bubbles">${bubblesHtml}</div>`;
+                    card.innerHTML = `<div class="mt-header"><div class="mt-title">${t.flag} ${t.name} <span style="font-size:12px; font-weight:normal; color:var(--text-muted);">· p. ${t.page}</span></div><div class="mt-count">${missingNums.length} manquants</div></div><div class="mt-bubbles">${bubblesHtml}</div>`;
                     container.appendChild(card);
                 }
             });
